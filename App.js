@@ -4,7 +4,7 @@ import SwipeUpDown from 'react-native-swipe-up-down';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 // import Icon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import SplashScreen from 'react-native-splash-screen';
 import MissingCaFetch from './MissingCaFetch';
 
 const cheerio = require('react-native-cheerio');
@@ -120,6 +120,7 @@ class ChangeDisplayButton extends React.Component {
     }
 
     componentDidMount(){
+      SplashScreen.hide();
         this.loadLiveFeed();
         console.log("State of the app is: ------------------------->"+AppState.currentState);
         setInterval(this.recurringLoading, 60000)
