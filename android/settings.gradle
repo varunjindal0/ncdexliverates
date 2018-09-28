@@ -1,0 +1,3 @@
+rootProject.name = 'ncdexliverates'
+
+include ':app'
