@@ -1,8 +1,6 @@
 import React from 'react';
-import { StyleSheet, ActivityIndicator, Text, View, ScrollView, Button, TouchableHighlight, TouchableOpacity , RefreshControl, FlatList, TouchableNativeFeedback, AppState} from 'react-native';
-import SwipeUpDown from 'react-native-swipe-up-down';
+import { StyleSheet, ActivityIndicator, Text, View, ScrollView, Button, TouchableHighlight, TouchableOpacity , TouchableNativeFeedback, AppState, NetInfo} from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-// import Icon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SplashScreen from 'react-native-splash-screen';
 import MissingCaFetch from './MissingCaFetch';
@@ -30,7 +28,7 @@ class ChangeDisplayButton extends React.Component {
   export default class App extends React.Component {
     constructor(props){
       super(props);
-      this.state = {stocks: [], commodity: [], selectedStock: [], selectedCommodityIndex: null, refreshing: false}
+      this.state = {appState: AppState.currentState, internetStatus: true, stocks: [], commodity: [], selectedStock: [], selectedCommodityIndex: null, refreshing: false}
     }
 
     loadLiveFeed(){
@@ -68,12 +66,12 @@ class ChangeDisplayButton extends React.Component {
                 dataArray[i] = tempdata2[parseInt(i/2)]
               }
             }      
-            console.log("**********************************--------------------------------------------");
+           // console.log("**********************************--------------------------------------------");
             //dataArray.forEach(elem=>{console.log(elem)});   
 
           this.setState({commodity: dataArray})
           // console.log(index);
-           console.log(this.state.commodity.length)
+         //  console.log(this.state.commodity.length)
           // console.log(this.state.commodity)
 
 
@@ -94,16 +92,18 @@ class ChangeDisplayButton extends React.Component {
           // tempdata.forEach(elem=>{
           //   console.log(elem[0]);
           // })
+          console.log("---------------------------------------------------------------------------------------------")
         })
+        
     }    
 
     handleEntryPress(index){
-        console.log("Entry number this is pressed: "+ index)
+      //  console.log("Entry number this is pressed: "+ index)
         this.setState({selectedStock: this.state.commodity[index], selectedCommodityIndex: index})
     }
 
     onSwipeDown(gestureState) {
-        console.log('You swiped down!');
+        // console.log('You swiped down!');
         this.setState({selectedCommodityIndex: null, selectedStock: []})
     }
 
@@ -113,16 +113,52 @@ class ChangeDisplayButton extends React.Component {
     //   }
 
     recurringLoading = ()=>{
-      if(AppState.currentState==='active'){
-        console.log(" Yeah I am being called!!!!!!!!!!--------------------------------------------------")
+      console.log("I am recurringLoading ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+      if(this.state.appState==='active' && this.state.internetStatus){
+     //   console.log(" Yeah I am being called!!!!!!!!!!--------------------------------------------------")
+        console.log("Our appState is :"+ this.state.appState + "^^^^^" + "internetStatus is: " +this.state.internetStatus);
         this.loadLiveFeed();
+      }
+    }
+
+    handleConnectivityChange = (connectionInfo)=>{
+   //   console.log('First change, type: ' + connectionInfo.type + ', effectiveType: ' + connectionInfo.effectiveType);
+      if(connectionInfo.type != "none"){
+       // console.log("------------------" + connectionInfo.type)
+        this.setState({internetStatus: true});
+        this.recurringLoading();
+      }else {
+        this.setState({internetStatus: false});
+      }
+    }
+
+    _handleAppStateChange = (nextAppState)=>{
+      console.log("_handleAppStateChange is called");
+      this.setState({appState: nextAppState});
+      console.log(this.state.appState)
+      if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+        // console.log('App has come to the foreground!')
+        this.recurringLoading();
       }
     }
 
     componentDidMount(){
       SplashScreen.hide();
-        this.loadLiveFeed();
-        console.log("State of the app is: ------------------------->"+AppState.currentState);
+      AppState.addEventListener('change', this._handleAppStateChange);
+      NetInfo.addEventListener(
+        'connectionChange',
+        this.handleConnectivityChange
+      );
+      NetInfo.isConnected.fetch().then(isConnected => {
+        console.log('First, is ' + (isConnected ? 'online' : 'offline'));
+        if(isConnected){
+          this.setState({internetStatus: true});
+        }else {
+          this.setState({internetStatus: false});
+        }
+      });
+        // this.loadLiveFeed();
+      //  console.log("State of the app is: ------------------------->"+AppState.currentState);
         setInterval(this.recurringLoading, 60000)
     }
 
@@ -148,7 +184,7 @@ class ChangeDisplayButton extends React.Component {
                    this.state.commodity.map(function(value,index){
                //   console.log("--------------------------------------------------------------------------------------------------- : "+index + " "+value[0]);
                   return (
-                        <TouchableNativeFeedback useForeground={true} onPress={()=>this.handleEntryPress(index)} key={index} underlayColor= '#293242'>
+                        <TouchableHighlight useForeground={true} onPress={()=>this.handleEntryPress(index)} key={index} underlayColor= '#293242'>
                         <View style={(index!=this.state.selectedCommodityIndex)?styles.stockEntry:styles.selectedStockEntry}>
                          <View>
                           <Text style={{color: '#fff', fontWeight: 'bold', paddingLeft: 6, fontSize: 15}}>
@@ -174,7 +210,7 @@ class ChangeDisplayButton extends React.Component {
                             
                             </View>  
                             </View>  
-                      </TouchableNativeFeedback>
+                      </TouchableHighlight>
                       
                   )
                   
@@ -187,12 +223,23 @@ class ChangeDisplayButton extends React.Component {
             </View>
                 )
                } else {
-                 return (
-                      <View style={ {flex: 1, backgroundColor: '#02091A', justifyContent: 'center', alignItems: 'center'} }>
-                        <Text style={{color: '#fff'}}>Loading... Please wait!</Text>
-                        <ActivityIndicator size="large" color="#00ff00" />
-                      </View>  
-                     )  
+                 if(this.state.internetStatus){
+                  return (
+                    <View style={ {flex: 1, backgroundColor: '#02091A', justifyContent: 'center', alignItems: 'center'} }>
+                      <Text style={{color: '#fff'}}>Loading... Please wait!</Text>
+                      <ActivityIndicator size="large" color="#00ff00" />
+                    </View>  
+                   ) 
+                 }else {
+                   return(
+                    <View style={ {flex: 1, backgroundColor: '#02091A', justifyContent: 'center', alignItems: 'center'} }>
+                     <Text style={{color: '#fff', fontSize: 18}}>No or Bad Internet!</Text>
+                     <Text style={{color: '#fff'}}>Please check your Connection and try again!</Text>
+                  </View> 
+                   )
+                  
+                 }
+                  
                }
               }.bind(this)()
               
