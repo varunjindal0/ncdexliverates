@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ActivityIndicator, Text, View, ScrollView, Button, TouchableHighlight, TouchableOpacity , TouchableNativeFeedback, AppState, NetInfo} from 'react-native';
+import { Alert, StyleSheet, ActivityIndicator, Text, View, ScrollView, Button, TouchableHighlight, TouchableOpacity , TouchableNativeFeedback, AppState, NetInfo} from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SplashScreen from 'react-native-splash-screen';
@@ -25,10 +25,54 @@ class ChangeDisplayButton extends React.Component {
     }
   }
 
+  class CommodityEntry extends React.PureComponent {
+    constructor(props){
+      super(props);
+      // state: Color of this entry
+      this.state={isSelected: false}
+    }
+    handleEntryPress2=(index)=>{
+      this.setState({isSelected: true})
+    }
+    // componentWillMount(){
+    //   console.log("what the hell is this: "+ this.props.selectedCommodityIndex + this.props.index);
+    //   console.log("I am in componentDidMount of CommodityEntry: "+ this.props.selectedCommodityIndex===this.props.index)
+    //   this.setState({isSelected: this.props.selectedCommodityIndex===this.props.index?true:false})
+    // }
+    render(){
+      console.log(this.props.selectedCommodityIndex===this.props.index + " :: " + this.state.isSelected);
+      console.log("Index of entry Selected is: "+this.props.index + " Index of selectedCommodity: "+this.props.selectedCommodityIndex);
+      return (
+        //  <View style={(this.props.index!=this.props.selectedCommodityIndex)?styles.stockEntry:styles.selectedStockEntry}>
+            <TouchableHighlight useForeground={true} onPress={()=>{this.props.handleEntryPress(this.props.index)}} underlayColor= '#293242'>
+            {/* <View style={(this.props.index!=this.props.selectedCommodityIndex)?styles.stockEntry:styles.selectedStockEntry}> */}
+            <View style={!this.props.isSelected?styles.stockEntry:styles.selectedStockEntry}>
+              <View>
+              <Text style={{color: '#fff', fontWeight: 'bold', paddingLeft: 6, fontSize: 15}}>
+                {this.props.value[0] + " "}
+              </Text>
+              <Text style={{color: '#fff', fontWeight: 'bold', paddingLeft: 6}}>{this.props.value[1]}</Text>
+              </View>
+                
+
+                <View style={styles.stockEntryRightPart} >
+                
+                  <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 16}}>
+                    {Number(this.props.value[6]).toFixed(2)}
+                  </Text>
+                  <ChangeDisplayButton a='1' Entry={this.props.value} />
+                
+                </View>  
+                </View>  
+                </TouchableHighlight>
+      )
+    }
+  }
+
   export default class App extends React.Component {
     constructor(props){
       super(props);
-      this.state = {appState: AppState.currentState, internetStatus: true, stocks: [], commodity: [], selectedStock: [], selectedCommodityIndex: null, refreshing: false}
+      this.state = {selectedCommodityInfoArray: [], appState: AppState.currentState, internetStatus: true, stocks: [], commodity: [], selectedStock: [], selectedCommodityIndex: null, refreshing: false}
     }
 
     loadLiveFeed(){
@@ -65,11 +109,20 @@ class ChangeDisplayButton extends React.Component {
               } else {
                 dataArray[i] = tempdata2[parseInt(i/2)]
               }
-            }      
-           // console.log("**********************************--------------------------------------------");
-            //dataArray.forEach(elem=>{console.log(elem)});   
+            } 
+            // console.log(dataArray[1].length);
+            // // adding a flag at the end of each row of this 2:Dimensional data array which indicates if this entry is selected one or not
+            // dataArray.map(elem=>{
+            //   elem[15]= false;
+            // })
+
 
           this.setState({commodity: dataArray})
+          var buff=[]
+          for(i=0;i<this.state.commodity.length;i++){
+            buff[i]= false;
+          }
+          this.setState({selectedCommodityInfoArray: buff})
           // console.log(index);
          //  console.log(this.state.commodity.length)
           // console.log(this.state.commodity)
@@ -78,17 +131,19 @@ class ChangeDisplayButton extends React.Component {
 
           //************************************************************************************************************************ */
 
-          var info2 = $('.altItemcolor').text().trim().replace(/\s\s+/g, ',')
-          var dataArray2 = info2.split(",");
-          var temp=[];
-          var tempdata=[]
-          for(index=0; index<dataArray2.length; index++){
-           temp[index%15] = dataArray2[index];
-           if(index%15 == 14){
-             tempdata.push(temp);
-             temp= [null];
-           }
-          }
+          // var info2 = $('.altItemcolor').text().trim().replace(/\s\s+/g, ',')
+          // var dataArray2 = info2.split(",");
+          // var temp=[];
+          // var tempdata=[]
+          // for(index=0; index<dataArray2.length; index++){
+          //  temp[index%15] = dataArray2[index];
+          //  if(index%15 == 14){
+          //    tempdata.push(temp);
+          //    temp= [null];
+          //  }
+          // }
+
+          //************************************************************* */
           // tempdata.forEach(elem=>{
           //   console.log(elem[0]);
           // })
@@ -97,9 +152,27 @@ class ChangeDisplayButton extends React.Component {
         
     }    
 
-    handleEntryPress(index){
-      //  console.log("Entry number this is pressed: "+ index)
-        this.setState({selectedStock: this.state.commodity[index], selectedCommodityIndex: index})
+    handleEntryPress=(index)=>{
+      
+       // console.log("Entry number this is pressed: "+ index + this.state.commodity[index]);
+      
+       this.setState({selectedStock: this.state.commodity[index], selectedCommodityIndex: index})
+        // this.setState({isSelected: true})
+      //  this.setState({selectedStock: this.state.commodity[index]});
+        // -------->
+        this.setState({selectedCommodityIndex: index});
+        // var temp = [];
+        // for(i=0;i<this.state.selectedCommodityInfoArray.length;i++){
+        //   if(i===index){
+        //     temp[index]=true;
+        //   }else {
+        //     temp[i] = false ;
+        //   }
+        // }
+        
+       // this.setState({selectedCommodityInfoArray: temp})
+
+     // Alert.alert("Entry number this is pressed:" + index + this.state.commodity[index]);
     }
 
     onSwipeDown(gestureState) {
@@ -184,40 +257,38 @@ class ChangeDisplayButton extends React.Component {
                    this.state.commodity.map(function(value,index){
                //   console.log("--------------------------------------------------------------------------------------------------- : "+index + " "+value[0]);
                   return (
-                        <TouchableHighlight useForeground={true} onPress={()=>this.handleEntryPress(index)} key={index} underlayColor= '#293242'>
-                        <View style={(index!=this.state.selectedCommodityIndex)?styles.stockEntry:styles.selectedStockEntry}>
-                         <View>
-                          <Text style={{color: '#fff', fontWeight: 'bold', paddingLeft: 6, fontSize: 15}}>
-                            {value[0] + " "}
-                          </Text>
-                          <Text style={{color: '#fff', fontWeight: 'bold', paddingLeft: 6}}>{value[1]}</Text>
-                          </View>
+                      //   <TouchableHighlight useForeground={true} onPress={()=>this.handleEntryPress(index)} key={index} underlayColor= '#293242'>
+                      //   <View style={(index!=this.state.selectedCommodityIndex)?styles.stockEntry:styles.selectedStockEntry}>
+                      //    <View>
+                      //     <Text style={{color: '#fff', fontWeight: 'bold', paddingLeft: 6, fontSize: 15}}>
+                      //       {value[0] + " "}
+                      //     </Text>
+                      //     <Text style={{color: '#fff', fontWeight: 'bold', paddingLeft: 6}}>{value[1]}</Text>
+                      //     </View>
                             
     
-                            <View style={styles.stockEntryRightPart} >
+                      //       <View style={styles.stockEntryRightPart} >
                             
-                              <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 16}}>
-                                {Number(value[6]).toFixed(2)}
-                              </Text>
-                              
-                              {/* <TouchableHighlight style={{paddingLeft: 9}} a='1' onPress={()=> console.log("IT SHOULD TOOGLE %AGE CHANGE AND ABSOLUTE CHANGE"+this.props.backgroundColor)} underlayColor= 'transparent'>
-                                <View style={[styles.button, {backgroundColor: (value[5]-value[2])>=0 ? '#5ae224':'#c10141'}]}>
-                                  <Text style={styles.buttonText}>{(value[5]-value[2]).toFixed(2)>0 ? '+'+(value[5]-value[2]).toFixed(2):(value[5]-value[2]).toFixed(2)}</Text>
-                                </View>
-                                
-                              </TouchableHighlight> */}
-                              <ChangeDisplayButton a='1' Entry={value} />
+                      //         <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 16}}>
+                      //           {Number(value[6]).toFixed(2)}
+                      //         </Text>
+                      //         <ChangeDisplayButton a='1' Entry={value} />
                             
-                            </View>  
-                            </View>  
-                      </TouchableHighlight>
-                      
+                      //       </View>  
+                      //       </View>  
+                      // </TouchableHighlight>
+                      // <TouchableHighlight useForeground={true} onPress={()=>this.handleEntryPress(index)} key={index} underlayColor= '#293242'>
+
+
+                      //  <CommodityEntry  value={value} isSelected={this.state.selectedCommodityInfoArray[index] } selectedCommodityIndex={this.state.selectedCommodityIndex} handleEntryPress={this.handleEntryPress} index={index} key={index}/>
+                        <CommodityEntry  value={value} isSelected={this.state.selectedCommodityIndex==index?true:false } handleEntryPress={this.handleEntryPress} index={index} key={index}/>
+
+                        // </TouchableHighlight>
                   )
                   
                     
                 }.bind(this))
-                
-                
+              
               }
                </ScrollView>
             </View>
