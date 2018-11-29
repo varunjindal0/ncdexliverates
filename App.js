@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, StyleSheet, ActivityIndicator, Text, View, ScrollView, Button, TouchableHighlight, TouchableOpacity , TouchableNativeFeedback, AppState, NetInfo} from 'react-native';
+import { Alert, StyleSheet, ActivityIndicator, Text, View, ScrollView, Button, TouchableHighlight, TouchableOpacity , TouchableNativeFeedback, AppState, NetInfo, RefreshControl} from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SplashScreen from 'react-native-splash-screen';
@@ -10,7 +10,7 @@ const cheerio = require('react-native-cheerio');
 class ChangeDisplayButton extends React.Component {
     constructor(props){
       super(props);
-      this.state={toggleDisplayChangeFlag: this.props.a}
+      this.state={toggleDisplayChangeFlag: true}
     }
     render(){
       value = this.props.Entry;
@@ -19,29 +19,27 @@ class ChangeDisplayButton extends React.Component {
               <View style={[styles.button, {backgroundColor: (value[7])>=0 ? '#5ae224':'#c10141'}]}>
                 <Text style={styles.buttonText}>{this.state.toggleDisplayChangeFlag ? ((value[7])>0 ? '+'+(value[7]) : value[7]) : (value[8]>=0 ? '+'+value[8]+'%' : value[8]+'%')}</Text>
               </View>
-              {/* ((value[5]-value[2])>0) ? '#5ae224':'#c10141' */}
-             </TouchableHighlight>
+            </TouchableHighlight>
           )
     }
   }
 
   class CommodityEntry extends React.PureComponent {
-    constructor(props){
-      super(props);
-      // state: Color of this entry
-      this.state={isSelected: false}
-    }
-    handleEntryPress2=(index)=>{
-      this.setState({isSelected: true})
-    }
+    // constructor(props){
+    //   super(props);
+    //   // state: Color of this entry
+    //   this.state={isSelected: false}
+    // }
+    // handleEntryPress2=(index)=>{
+    //   this.setState({isSelected: true})
+    // }
     // componentWillMount(){
     //   console.log("what the hell is this: "+ this.props.selectedCommodityIndex + this.props.index);
     //   console.log("I am in componentDidMount of CommodityEntry: "+ this.props.selectedCommodityIndex===this.props.index)
     //   this.setState({isSelected: this.props.selectedCommodityIndex===this.props.index?true:false})
     // }
     render(){
-      console.log(this.props.selectedCommodityIndex===this.props.index + " :: " + this.state.isSelected);
-      console.log("Index of entry Selected is: "+this.props.index + " Index of selectedCommodity: "+this.props.selectedCommodityIndex);
+      console.log("Index of entry Selected is: "+this.props.index + " So: "+this.props.isSelected);
       return (
         //  <View style={(this.props.index!=this.props.selectedCommodityIndex)?styles.stockEntry:styles.selectedStockEntry}>
             <TouchableHighlight useForeground={true} onPress={()=>{this.props.handleEntryPress(this.props.index)}} underlayColor= '#293242'>
@@ -60,7 +58,7 @@ class ChangeDisplayButton extends React.Component {
                   <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 16}}>
                     {Number(this.props.value[6]).toFixed(2)}
                   </Text>
-                  <ChangeDisplayButton a='1' Entry={this.props.value} />
+                  <ChangeDisplayButton Entry={this.props.value} />
                 
                 </View>  
                 </View>  
@@ -72,12 +70,16 @@ class ChangeDisplayButton extends React.Component {
   export default class App extends React.Component {
     constructor(props){
       super(props);
-      this.state = {selectedCommodityInfoArray: [], appState: AppState.currentState, internetStatus: true, stocks: [], commodity: [], selectedStock: [], selectedCommodityIndex: null, refreshing: false}
+      this.state = {
+                    appState: AppState.currentState, internetStatus: true,
+                    commodity: [], selectedStock: [], selectedCommodityIndex: null, 
+                    refreshing: false
+                  }
     }
 
     loadLiveFeed(){
         MissingCaFetch.fetch(html=>{
-            console.log("I am in this magical function>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+            // console.log("I am in this magical function>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
             const $= cheerio.load(html);
             var info = $('.ItemColor').text().trim().replace(/\s\s+/g, ',')
             var dataArray = info.split(",");
@@ -117,12 +119,15 @@ class ChangeDisplayButton extends React.Component {
             // })
 
 
-          this.setState({commodity: dataArray})
-          var buff=[]
-          for(i=0;i<this.state.commodity.length;i++){
-            buff[i]= false;
-          }
-          this.setState({selectedCommodityInfoArray: buff})
+          this.setState({commodity: dataArray});
+          this.setState({commodity: dataArray}, ()=>{
+            this.setState({refreshing: false});
+          });
+          // var buff=[]
+          // for(i=0;i<this.state.commodity.length;i++){
+          //   buff[i]= false;
+          // }
+          // this.setState({selectedCommodityInfoArray: buff})
           // console.log(index);
          //  console.log(this.state.commodity.length)
           // console.log(this.state.commodity)
@@ -147,7 +152,7 @@ class ChangeDisplayButton extends React.Component {
           // tempdata.forEach(elem=>{
           //   console.log(elem[0]);
           // })
-          console.log("---------------------------------------------------------------------------------------------")
+          // console.log("---------------------------------------------------------------------------------------------")
         })
         
     }    
@@ -160,7 +165,7 @@ class ChangeDisplayButton extends React.Component {
         // this.setState({isSelected: true})
       //  this.setState({selectedStock: this.state.commodity[index]});
         // -------->
-        this.setState({selectedCommodityIndex: index});
+        // this.setState({selectedCommodityIndex: index});
         // var temp = [];
         // for(i=0;i<this.state.selectedCommodityInfoArray.length;i++){
         //   if(i===index){
@@ -198,21 +203,33 @@ class ChangeDisplayButton extends React.Component {
    //   console.log('First change, type: ' + connectionInfo.type + ', effectiveType: ' + connectionInfo.effectiveType);
       if(connectionInfo.type != "none"){
        // console.log("------------------" + connectionInfo.type)
-        this.setState({internetStatus: true});
-        this.recurringLoading();
+        this.setState({internetStatus: true}, ()=>{
+          this.recurringLoading();
+        });
+        // this.recurringLoading();
       }else {
         this.setState({internetStatus: false});
       }
     }
 
     _handleAppStateChange = (nextAppState)=>{
-      console.log("_handleAppStateChange is called");
-      this.setState({appState: nextAppState});
-      console.log(this.state.appState)
-      if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
-        // console.log('App has come to the foreground!')
+      //  console.log("_handleAppStateChange is called: "+nextAppState);
+      //  console.log("this.state.appState: "+this.state.appState)
+      //  var bool1 = this.state.appState==='background';
+      //  var bool2 = nextAppState === 'active'
+      //  console.log(bool1);
+      //  console.log("bdkjbsk" + bool2)
+
+      // if (this.state.appState==='background' && nextAppState === 'active') {
+      //   console.log('App has come to the foreground!')
+      //   this.setState({appState: nextAppState}, ()=>{
+      //     // console.log(this.state.appState);
+      //     this.recurringLoading();
+      //   });
+      // }
+      this.setState({appState: nextAppState}, ()=>{
         this.recurringLoading();
-      }
+      });      
     }
 
     componentDidMount(){
@@ -232,7 +249,14 @@ class ChangeDisplayButton extends React.Component {
       });
         // this.loadLiveFeed();
       //  console.log("State of the app is: ------------------------->"+AppState.currentState);
-        setInterval(this.recurringLoading, 60000)
+        // setInterval(this.recurringLoading, 60000)
+
+        this.recurringLoading();
+    }
+
+    _onRefresh = () => {
+      this.setState({refreshing: true});
+      this.loadLiveFeed();
     }
 
     render() {
@@ -252,7 +276,12 @@ class ChangeDisplayButton extends React.Component {
                    if(bool){
                  return ( 
                      <View style={styles.stockBasket}>
-                     <ScrollView>
+                     <ScrollView refreshControl={
+                                                  <RefreshControl
+                                                    refreshing={this.state.refreshing}
+                                                    onRefresh={this._onRefresh}
+                                                  />
+                                                }>
                     {
                    this.state.commodity.map(function(value,index){
                //   console.log("--------------------------------------------------------------------------------------------------- : "+index + " "+value[0]);

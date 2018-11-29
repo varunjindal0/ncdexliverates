@@ -86,7 +86,7 @@ apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
-def enableSeparateBuildPerCPUArchitecture = false
+def enableSeparateBuildPerCPUArchitecture = true
 
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
@@ -100,11 +100,18 @@ android {
     defaultConfig {
         applicationId "com.ncdexliverates"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        ndk {
-            abiFilters "armeabi-v7a", "x86"
+    }
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file('my-release-key.keystore')
+                storePassword 'samsung03'
+                keyAlias 'my-key-alias'
+                keyPassword 'samsung03'
+            }
         }
     }
     splits {
@@ -119,6 +126,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
@@ -130,7 +138,7 @@ android {
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
-                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+                        versionCodes.get(abi) * 1048618 + defaultConfig.versionCode
             }
         }
     }

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/res/merged/release/mipmap-xxhdpi/icon.png",
+        "source": "/Users/varunjindal/Desktop/ncdexliverates/android/app/src/main/res/mipmap-xxhdpi/icon.png"
+    },
+    {
+        "merged": "/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/res/merged/release/mipmap-xxhdpi/ic_launcher.png",
+        "source": "/Users/varunjindal/Desktop/ncdexliverates/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    }
+]
