@@ -39,7 +39,8 @@ class ChangeDisplayButton extends React.Component {
     //   this.setState({isSelected: this.props.selectedCommodityIndex===this.props.index?true:false})
     // }
     render(){
-      console.log("Index of entry Selected is: "+this.props.index + " So: "+this.props.isSelected);
+      // console.log("Index of entry Selected is: "+this.props.index + " So: "+this.props.isSelected);
+      // console.log(this.props.value)
       return (
         //  <View style={(this.props.index!=this.props.selectedCommodityIndex)?styles.stockEntry:styles.selectedStockEntry}>
             <TouchableHighlight useForeground={true} onPress={()=>{this.props.handleEntryPress(this.props.index)}} underlayColor= '#293242'>
@@ -79,30 +80,79 @@ class ChangeDisplayButton extends React.Component {
 
     loadLiveFeed(){
         MissingCaFetch.fetch(html=>{
-            // console.log("I am in this magical function>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-            const $= cheerio.load(html);
-            var info = $('.ItemColor').text().trim().replace(/\s\s+/g, ',')
-            var dataArray = info.split(",");
+            console.log("I am in this magical function>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+            // console.log(html);
+            const $= cheerio.load(html, {
+              xml: {
+                normalizeWhitespace: true,
+              }
+            });
+
+            var dataArray=[];
+            $('.ItemColor').each(function(i, elem) {
+                $('td', this).each(function(ind, innerElem){
+                dataArray.push($(this).text())
+                });
+            }); 
+            // console.log("=-=-=: "+dataArray + dataArray.length)
             var temp=[];
-            var tempdata=[]
+            var tempdata=[];
             for(index=0; index<dataArray.length; index++){
-            temp[index%15] = dataArray[index];
-            if(index%15 == 14){
-                tempdata.push(temp);
-                temp= [null];
-            }
-            }
-            var info2 = $('.altItemcolor').text().trim().replace(/\s\s+/g, ',')
-            var dataArray2 = info2.split(",");
-            var temp=[];
-            var tempdata2=[]
-            for(index=0; index<dataArray2.length; index++){
-            temp[index%15] = dataArray2[index];
-            if(index%15 == 14){
-                tempdata2.push(temp);
-                temp = [null];
+                if(index%16 != 15){
+                temp[index%16] = dataArray[index].trim();
+                }
+                if(index%16 == 14){
+                    tempdata.push(temp);
+                    temp= [null];
                 }
             }
+
+            var dataArray=[];
+            $('.altItemcolor').each(function(i, elem) {
+                $('td', this).each(function(ind, innerElem){
+                dataArray.push($(this).text())
+                });
+            }); 
+            // console.log("=-=-=: "+dataArray + dataArray.length)
+            var temp=[];
+            var tempdata2=[];
+            for(index=0; index<dataArray.length; index++){
+                if(index%16 != 15){
+                temp[index%16] = dataArray[index].trim();
+                }
+                if(index%16 == 14){
+                    tempdata2.push(temp);
+                    temp= [null];
+                }
+            }
+           
+
+
+            // var info = $('.ItemColor').text().trim().replace(/\s\s+/g, ',')
+            // var dataArray = info.split(",");
+            // console.log("DAtaArray: ------------------------------->"+dataArray)
+            // var temp=[];
+            // var tempdata=[]
+            // for(index=0; index<dataArray.length; index++){
+            // temp[index%15] = dataArray[index];
+            // if(index%15 == 14){
+            //     tempdata.push(temp);
+            //     temp= [null];
+            // }
+            // }
+
+            // var info2 = $('.altItemcolor').text().trim().replace(/\s\s+/g, ',')
+            // var dataArray2 = info2.split(",");
+            // console.log("DAtaArray2: ################################>"+dataArray2)
+            // var temp=[];
+            // var tempdata2=[]
+            // for(index=0; index<dataArray2.length; index++){
+            // temp[index%15] = dataArray2[index];
+            // if(index%15 == 14){
+            //     tempdata2.push(temp);
+            //     temp = [null];
+            //     }
+            // }
          
             var dataArray =[];
             for(i=0 ; i<(tempdata.length+tempdata2.length); i++){
@@ -112,27 +162,11 @@ class ChangeDisplayButton extends React.Component {
                 dataArray[i] = tempdata2[parseInt(i/2)]
               }
             } 
-            // console.log(dataArray[1].length);
-            // // adding a flag at the end of each row of this 2:Dimensional data array which indicates if this entry is selected one or not
-            // dataArray.map(elem=>{
-            //   elem[15]= false;
-            // })
-
-
-          this.setState({commodity: dataArray});
+            
+          // this.setState({commodity: dataArray});        // Today
           this.setState({commodity: dataArray}, ()=>{
             this.setState({refreshing: false});
           });
-          // var buff=[]
-          // for(i=0;i<this.state.commodity.length;i++){
-          //   buff[i]= false;
-          // }
-          // this.setState({selectedCommodityInfoArray: buff})
-          // console.log(index);
-         //  console.log(this.state.commodity.length)
-          // console.log(this.state.commodity)
-
-
 
           //************************************************************************************************************************ */
 
@@ -264,7 +298,7 @@ class ChangeDisplayButton extends React.Component {
           velocityThreshold: 0.3,
           directionalOffsetThreshold: 80
         };
-       // console.log(this.state);
+        // console.log("===========================================> "+this.state.commodity);
         let bool = this.state.commodity.length;
         return (
           <View style={styles.container}>
@@ -285,35 +319,12 @@ class ChangeDisplayButton extends React.Component {
                     {
                    this.state.commodity.map(function(value,index){
                //   console.log("--------------------------------------------------------------------------------------------------- : "+index + " "+value[0]);
-                  return (
-                      //   <TouchableHighlight useForeground={true} onPress={()=>this.handleEntryPress(index)} key={index} underlayColor= '#293242'>
-                      //   <View style={(index!=this.state.selectedCommodityIndex)?styles.stockEntry:styles.selectedStockEntry}>
-                      //    <View>
-                      //     <Text style={{color: '#fff', fontWeight: 'bold', paddingLeft: 6, fontSize: 15}}>
-                      //       {value[0] + " "}
-                      //     </Text>
-                      //     <Text style={{color: '#fff', fontWeight: 'bold', paddingLeft: 6}}>{value[1]}</Text>
-                      //     </View>
-                            
-    
-                      //       <View style={styles.stockEntryRightPart} >
-                            
-                      //         <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 16}}>
-                      //           {Number(value[6]).toFixed(2)}
-                      //         </Text>
-                      //         <ChangeDisplayButton a='1' Entry={value} />
-                            
-                      //       </View>  
-                      //       </View>  
-                      // </TouchableHighlight>
-                      // <TouchableHighlight useForeground={true} onPress={()=>this.handleEntryPress(index)} key={index} underlayColor= '#293242'>
-
-
-                      //  <CommodityEntry  value={value} isSelected={this.state.selectedCommodityInfoArray[index] } selectedCommodityIndex={this.state.selectedCommodityIndex} handleEntryPress={this.handleEntryPress} index={index} key={index}/>
-                        <CommodityEntry  value={value} isSelected={this.state.selectedCommodityIndex==index?true:false } handleEntryPress={this.handleEntryPress} index={index} key={index}/>
-
-                        // </TouchableHighlight>
+               if(value){
+                return (
+                  <CommodityEntry  value={value} isSelected={this.state.selectedCommodityIndex==index?true:false } handleEntryPress={this.handleEntryPress} index={index} key={index}/>
                   )
+               }   
+               
                   
                     
                 }.bind(this))

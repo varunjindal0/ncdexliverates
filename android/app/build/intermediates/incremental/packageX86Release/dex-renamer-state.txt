@@ -1,4 +1,4 @@
-#Mon Nov 26 14:31:54 IST 2018
-base.0=/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/transforms/dex/release/folders/1000/1f/main
+#Mon Dec 03 22:22:42 IST 2018
+base.0=/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/transforms/dex/release/folders/1000/1f/main
 renamed.0=classes.dex
-file.0=/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/transforms/dex/release/folders/1000/1f/main/classes.dex
+file.0=/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/transforms/dex/release/folders/1000/1f/main/classes.dex

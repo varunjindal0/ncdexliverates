@@ -4,7 +4,15 @@
         "source": "/Users/varunjindal/Desktop/ncdexliverates/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
     },
     {
+        "merged": "/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi/icon.png",
+        "source": "/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/src/main/res/mipmap-xhdpi/icon.png"
+    },
+    {
         "merged": "/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi/icon.png",
         "source": "/Users/varunjindal/Desktop/ncdexliverates/android/app/src/main/res/mipmap-xhdpi/icon.png"
+    },
+    {
+        "merged": "/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_launcher.png",
+        "source": "/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
     }
 ]

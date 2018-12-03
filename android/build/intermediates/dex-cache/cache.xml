@@ -3,21 +3,21 @@
 
     <item
         is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.4.0_b0ac97e9a00fb5ddd99dee665f4f3ac8d9599bdd.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_6c8c782bcf1807cbcbf87ba973d12e6fb6f95737.jar" />
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_6c5b9b556d5e5cb159debbc4b8051c1974aa5213.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_02145f566d1c8234c905fd3b3b03c146089cc5e7.jar" />
     </item>
     <item
         is-multidex="false"
@@ -26,25 +26,43 @@
         optimize="true"
         revision="23.0.1"
         sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_4a952315f97187c7e2d7aa8180a3611241b26a64.jar" />
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_4a952315f97187c7e2d7aa8180a3611241b26a64.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.3.0/jars/classes.jar"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.3.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_cc567e8b989b9fd6a15bd7770eb46e5e4abaee11.jar" />
+        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_76d79aa08b9fbad756d1f72339c63b32107f7975.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_c3e4aa5eb02f86ba95be3f06e0f2bbf20e671a19.jar" />
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.4.0_7f9169cba7468352733f3632baf2e57fc52ac07b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.4.0_a1be0dae2031ce970c4548ff18030910e49f9635.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_5730b1837b926482ae2d778eaad0ede3cc07c7b8.jar" />
     </item>
     <item
         is-multidex="false"
@@ -53,34 +71,25 @@
         optimize="true"
         revision="23.0.1"
         sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_863385f0c41a66a863c022be3d607ac5f2bb602b.jar" />
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_863385f0c41a66a863c022be3d607ac5f2bb602b.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.3.0/jars/classes.jar"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_113e0a1969bb97bebf1687413f2601a92c8c4ed4.jar" />
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_8f6ce85eb1c8c3b187f02387ac87017624a644fc.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.3.0/jars/classes.jar"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/ncdexliverates/react-native-splash-screen/unspecified/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.3.0_267cd64bd3f491950f900ab243b1da29b9b03cba.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.3.0_70b8b61d727c5e025829f20c29444f4df5724317.jar" />
+        sha1="81545e78a5aef654b2e0aac62b2be5ad8ad7b908">
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/ncdexliverates-react-native-splash-screen-unspecified_75db82c108f0b356a9b8129483aed308e7c38722.jar" />
     </item>
     <item
         is-multidex="false"
@@ -89,16 +98,7 @@
         optimize="true"
         revision="23.0.1"
         sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_2c0bc6c7831558fb541515ba5e7bcc68fd306bec.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_83346b8766d14cb091923cce011a32e2cebfd1c1.jar" />
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_2c0bc6c7831558fb541515ba5e7bcc68fd306bec.jar" />
     </item>
     <item
         is-multidex="false"
@@ -107,16 +107,16 @@
         optimize="true"
         revision="23.0.1"
         sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.4.0_10706fa83e8fe547e06d141144f8d0719292c77b.jar" />
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.4.0_10706fa83e8fe547e06d141144f8d0719292c77b.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/ncdexliverates/react-native-vector-icons/unspecified/jars/classes.jar"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="f2cf527de8d0bd35d72088fafea02395ba4a9eec">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/ncdexliverates-react-native-vector-icons-unspecified_d6da9b03ade2444797b2bc0e7c975eeca744a735.jar" />
+        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_44033b87b3ce894e14e67ffbcec67ea463a5ed08.jar" />
     </item>
     <item
         is-multidex="false"
@@ -125,7 +125,43 @@
         optimize="true"
         revision="23.0.1"
         sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_bbb66a21194e684bc4d5dfe744be3df47d563caf.jar" />
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_bbb66a21194e684bc4d5dfe744be3df47d563caf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_c20087f9668fce388deecc1b46321de5b55e241b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.3.0_b9038819d53d27b738600069229d418fbb33dda3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_9de440f2b962490e7868be23a4cd599b980b4734.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.4.0_8da253aae6dc178360d09ecc1da8d142c058df07.jar" />
     </item>
     <item
         is-multidex="false"
@@ -134,70 +170,43 @@
         optimize="true"
         revision="23.0.1"
         sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_e260d68dce626f18ae0722be99c8295fbb493b56.jar" />
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_e260d68dce626f18ae0722be99c8295fbb493b56.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/jars/libs/infer-annotations-4.0.jar"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.3.0_e2b4e17c05fe5b28411e21b1d5448d22af3dc15a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/jars/libs/infer-annotations-4.0.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="9809e90be788acdb479b2b44e2112f3295a03068">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_56bcbaf9f36bad2c90eeff68aa1fa7bf3bbd1b20.jar" />
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_5ae03ad14e1669ad71c2ada4d2295dcffb27a0d2.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/ncdexliverates/react-native-splash-screen/unspecified/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="81545e78a5aef654b2e0aac62b2be5ad8ad7b908">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/ncdexliverates-react-native-splash-screen-unspecified_9fbb6e1709fba671286eeff5a8fe7757ecfda4c4.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.4.0_e9425d01643c68b138ead07bd86ed240cfa7c96c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_674ca170de64836b38e146c224db648e50d1d1be.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.4.0_d7cf1ae5853ffb8886b43c5cdcd797f88e345413.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/jars/classes.jar"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="e31331bdf6b5952badadbfc171f04b95c55d3b16">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.55.4_2cbea5e7f24123b6022773029148059fe713fc34.jar" />
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.55.4_b4d5c9276d59437298f4760324b351e1a4397bc5.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
+        jar="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/ncdexliverates/react-native-vector-icons/unspecified/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_1682b30c92a34a52beb78b632d4170ec17bcbe51.jar" />
+        sha1="f2cf527de8d0bd35d72088fafea02395ba4a9eec">
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/ncdexliverates-react-native-vector-icons-unspecified_068eb716e53dac3668a5bf0b6c8e5fa2c22ab006.jar" />
     </item>
     <item
         is-multidex="false"
@@ -206,16 +215,7 @@
         optimize="true"
         revision="23.0.1"
         sha1="f162442a19fff13995fbd51ba414d9ee05579080">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_a59550758bdcef205c62340fe769cd6ac209c8a0.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_69b3c4259a2e7d363671ce1ecc9f25f317e3d3d5.jar" />
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_a59550758bdcef205c62340fe769cd6ac209c8a0.jar" />
     </item>
     <item
         is-multidex="false"
@@ -224,7 +224,7 @@
         optimize="true"
         revision="23.0.1"
         sha1="6975da39a7040257bd51d21a231b76c915872d38">
-        <dex dex="/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_62d4206885c5c4cf7b7856505f38bc8fdb6099ca.jar" />
+        <dex dex="/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_62d4206885c5c4cf7b7856505f38bc8fdb6099ca.jar" />
     </item>
 
 </items>

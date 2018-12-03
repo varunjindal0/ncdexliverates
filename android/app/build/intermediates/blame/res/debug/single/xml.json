@@ -2,5 +2,9 @@
     {
         "merged": "/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/res/merged/debug/xml/preferences.xml",
         "source": "/Users/varunjindal/Desktop/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/res/xml/preferences.xml"
+    },
+    {
+        "merged": "/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/res/merged/debug/xml/preferences.xml",
+        "source": "/Users/varunjindal/Desktop/desktop-folder/ncdexliverates/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/res/xml/preferences.xml"
     }
 ]
