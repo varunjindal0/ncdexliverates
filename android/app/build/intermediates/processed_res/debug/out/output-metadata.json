@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "PROCESSED_RES",
+    "kind": "Directory"
+  },
+  "applicationId": "com.ncdexliverates",
+  "variantName": "processDebugResources",
+  "elements": [
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "x86"
+        }
+      ],
+      "versionCode": 2357238,
+      "versionName": "2.0",
+      "outputFile": "resources-x86Debug.ap_"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "armeabi-v7a"
+        }
+      ],
+      "versionCode": 1178620,
+      "versionName": "2.0",
+      "outputFile": "resources-armeabi-v7aDebug.ap_"
+    }
+  ]
+}

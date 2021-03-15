@@ -9,22 +9,22 @@ const cheerio = require('react-native-cheerio');
 
 class ChangeDisplayButton extends React.Component {
     constructor(props){
-      super(props);
-      this.state={toggleDisplayChangeFlag: true}
+        super(props);
+        // this.state={toggleDisplayChangeFlag: true}
     }
     render(){
-      value = this.props.Entry;
-      return (
-            <TouchableHighlight style={{paddingLeft: 9}} onPress={()=>this.setState({toggleDisplayChangeFlag: !this.state.toggleDisplayChangeFlag}) } underlayColor= 'transparent'>
-              <View style={[styles.button, {backgroundColor: (value[7])>=0 ? '#5ae224':'#c10141'}]}>
-                <Text style={styles.buttonText}>{this.state.toggleDisplayChangeFlag ? ((value[7])>0 ? '+'+(value[7]) : value[7]) : (value[8]>=0 ? '+'+value[8]+'%' : value[8]+'%')}</Text>
-              </View>
+        let value = this.props.Entry;
+        return (
+            <TouchableHighlight style={{paddingLeft: 9}} onPress={this.props.displayChangeButtonPressed} underlayColor= 'transparent'>
+                <View style={[styles.button, {backgroundColor: (value[0])>=0 ? '#5ae224':'#c10141'}]}>
+                    <Text style={styles.buttonText}>{this.props.toggleDisplayChangeFlag ? ((value[0])>0 ? '+'+(value[0]) : value[0]) : (value[1]>=0 ? '+'+value[1]+'%' : value[1]+'%')}</Text>
+                </View>
             </TouchableHighlight>
-          )
+        )
     }
-  }
+}
 
-  class CommodityEntry extends React.PureComponent {
+class CommodityEntry extends React.PureComponent {
     // constructor(props){
     //   super(props);
     //   // state: Color of this entry
@@ -39,165 +39,119 @@ class ChangeDisplayButton extends React.Component {
     //   this.setState({isSelected: this.props.selectedCommodityIndex===this.props.index?true:false})
     // }
     render(){
-      // console.log("Index of entry Selected is: "+this.props.index + " So: "+this.props.isSelected);
-      // console.log(this.props.value)
-      return (
-        //  <View style={(this.props.index!=this.props.selectedCommodityIndex)?styles.stockEntry:styles.selectedStockEntry}>
+        // console.log("Index of entry Selected is: "+this.props.index + " So: "+this.props.isSelected);
+        let entry = this.props.value;
+        let priceArr = this.props.value[3] ? this.props.value[3].trim().split(" ").filter(elem => elem !== "") : [];
+        // console.log("==============>       :::: ", this.props.value);
+        // console.log(priceArr);
+        let ltp = priceArr[1];
+        let high = priceArr[2];
+        let low = priceArr[0];
+        let changeDisplayEntry = [Number(entry[5]), Number(entry[6])]
+        return (
+            //  <View style={(this.props.index!=this.props.selectedCommodityIndex)?styles.stockEntry:styles.selectedStockEntry}>
             <TouchableHighlight useForeground={true} onPress={()=>{this.props.handleEntryPress(this.props.index)}} underlayColor= '#293242'>
-            {/* <View style={(this.props.index!=this.props.selectedCommodityIndex)?styles.stockEntry:styles.selectedStockEntry}> */}
-            <View style={!this.props.isSelected?styles.stockEntry:styles.selectedStockEntry}>
-              <View>
-              <Text style={{color: '#fff', fontWeight: 'bold', paddingLeft: 6, fontSize: 15}}>
-                {this.props.value[0] + " "}
-              </Text>
-              <Text style={{color: '#fff', fontWeight: 'bold', paddingLeft: 6}}>{this.props.value[1]}</Text>
-              </View>
-                
+                {/* <View style={(this.props.index!=this.props.selectedCommodityIndex)?styles.stockEntry:styles.selectedStockEntry}> */}
+                <View style={!this.props.isSelected?styles.stockEntry:styles.selectedStockEntry}>
+                    <View>
+                        <Text style={{color: '#fff', fontWeight: 'bold', paddingLeft: 6, fontSize: 15}}>
+                            {this.props.value[0] + " "}
+                        </Text>
+                        <Text style={{color: '#fff', fontWeight: 'bold', paddingLeft: 6}}>{this.props.value[1]}</Text>
+                    </View>
 
-                <View style={styles.stockEntryRightPart} >
-                
-                  <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 16}}>
-                    {Number(this.props.value[6]).toFixed(2)}
-                  </Text>
-                  <ChangeDisplayButton Entry={this.props.value} />
-                
-                </View>  
-                </View>  
-                </TouchableHighlight>
-      )
+
+                    <View style={styles.stockEntryRightPart} >
+
+                        <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 16}}>
+                            {Number(ltp).toFixed(2)}
+                        </Text>
+                        <ChangeDisplayButton displayChangeButtonPressed = {this.props.displayChangeButtonPressed} toggleDisplayChangeFlag={this.props.toggleDisplayChangeFlag} Entry={changeDisplayEntry} />
+
+                    </View>
+                </View>
+            </TouchableHighlight>
+        )
     }
-  }
+}
 
-  export default class App extends React.Component {
+export default class App extends React.Component {
     constructor(props){
-      super(props);
-      this.state = {
-                    appState: AppState.currentState, internetStatus: true,
-                    commodity: [], selectedStock: [], selectedCommodityIndex: null, 
-                    refreshing: false
-                  }
+        super(props);
+        this.state = {
+            appState: AppState.currentState, internetStatus: true,
+            commodity: [], selectedStock: [], selectedCommodityIndex: null,
+            refreshing: false,
+            toggleDisplayChangeFlag: true
+        }
     }
 
     loadLiveFeed(){
+        let url = "http://ncdex.com/market-watch/live_quotes";
         MissingCaFetch.fetch(html=>{
-            console.log("I am in this magical function>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-            // console.log(html);
-            const $= cheerio.load(html, {
-              xml: {
-                normalizeWhitespace: true,
-              }
-            });
-
-            var dataArray=[];
-            $('.ItemColor').each(function(i, elem) {
-                $('td', this).each(function(ind, innerElem){
-                dataArray.push($(this).text())
+                console.log("I am in this magical function>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+                const $= cheerio.load(html, {
+                    xml: {
+                        normalizeWhitespace: true,
+                    }
                 });
-            }); 
-            // console.log("=-=-=: "+dataArray + dataArray.length)
-            var temp=[];
-            var tempdata=[];
-            for(index=0; index<dataArray.length; index++){
-                if(index%16 != 15){
-                temp[index%16] = dataArray[index].trim();
-                }
-                if(index%16 == 14){
-                    tempdata.push(temp);
-                    temp= [null];
-                }
-            }
 
-            var dataArray=[];
-            $('.altItemcolor').each(function(i, elem) {
-                $('td', this).each(function(ind, innerElem){
-                dataArray.push($(this).text())
+                let newData = 0;
+                newData = $('tbody').html();
+                // console.log(newData);
+
+                let newerData = 0;
+                newerData = $('tr', newData);
+
+                let dataArray=[];
+                newerData.each(function (i, el){
+                    let entryArr = []
+                    $('td', this).each(function (ind, innerElem){
+                        entryArr.push($(this).text().trim());
+                    })
+                    dataArray.push(entryArr);
+                })
+
+                dataArray.sort(function (a, b){
+                    let x = a[0] ? a[0].toLowerCase() : " ";
+                    let y = b[0] ? b[0].toLowerCase() : " ";
+                    if (x < y) {return -1;}
+                    if (x > y) {return 1;}
+                    return 0;
                 });
-            }); 
-            // console.log("=-=-=: "+dataArray + dataArray.length)
-            var temp=[];
-            var tempdata2=[];
-            for(index=0; index<dataArray.length; index++){
-                if(index%16 != 15){
-                temp[index%16] = dataArray[index].trim();
-                }
-                if(index%16 == 14){
-                    tempdata2.push(temp);
-                    temp= [null];
-                }
-            }
-           
+                this.setState({commodity: dataArray}, ()=>{
+                    this.setState({refreshing: false});
+                });
 
+                //************************************************************************************************************************ */
 
-            // var info = $('.ItemColor').text().trim().replace(/\s\s+/g, ',')
-            // var dataArray = info.split(",");
-            // console.log("DAtaArray: ------------------------------->"+dataArray)
-            // var temp=[];
-            // var tempdata=[]
-            // for(index=0; index<dataArray.length; index++){
-            // temp[index%15] = dataArray[index];
-            // if(index%15 == 14){
-            //     tempdata.push(temp);
-            //     temp= [null];
-            // }
-            // }
+                // var info2 = $('.altItemcolor').text().trim().replace(/\s\s+/g, ',')
+                // var dataArray2 = info2.split(",");
+                // var temp=[];
+                // var tempdata=[]
+                // for(index=0; index<dataArray2.length; index++){
+                //  temp[index%15] = dataArray2[index];
+                //  if(index%15 == 14){
+                //    tempdata.push(temp);
+                //    temp= [null];
+                //  }
+                // }
 
-            // var info2 = $('.altItemcolor').text().trim().replace(/\s\s+/g, ',')
-            // var dataArray2 = info2.split(",");
-            // console.log("DAtaArray2: ################################>"+dataArray2)
-            // var temp=[];
-            // var tempdata2=[]
-            // for(index=0; index<dataArray2.length; index++){
-            // temp[index%15] = dataArray2[index];
-            // if(index%15 == 14){
-            //     tempdata2.push(temp);
-            //     temp = [null];
-            //     }
-            // }
-         
-            var dataArray =[];
-            for(i=0 ; i<(tempdata.length+tempdata2.length); i++){
-              if(i%2===0){
-                dataArray[i]= tempdata[i/2];
-              } else {
-                dataArray[i] = tempdata2[parseInt(i/2)]
-              }
-            } 
-            
-          // this.setState({commodity: dataArray});        // Today
-          this.setState({commodity: dataArray}, ()=>{
-            this.setState({refreshing: false});
-          });
-
-          //************************************************************************************************************************ */
-
-          // var info2 = $('.altItemcolor').text().trim().replace(/\s\s+/g, ',')
-          // var dataArray2 = info2.split(",");
-          // var temp=[];
-          // var tempdata=[]
-          // for(index=0; index<dataArray2.length; index++){
-          //  temp[index%15] = dataArray2[index];
-          //  if(index%15 == 14){
-          //    tempdata.push(temp);
-          //    temp= [null];
-          //  }
-          // }
-
-          //************************************************************* */
-          // tempdata.forEach(elem=>{
-          //   console.log(elem[0]);
-          // })
-          // console.log("---------------------------------------------------------------------------------------------")
-        })
-        
-    }    
+                //************************************************************* */
+                // tempdata.forEach(elem=>{
+                //   console.log(elem[0]);
+                // })
+                // console.log("---------------------------------------------------------------------------------------------")
+            })
+    }
 
     handleEntryPress=(index)=>{
-      
-       // console.log("Entry number this is pressed: "+ index + this.state.commodity[index]);
-      
-       this.setState({selectedStock: this.state.commodity[index], selectedCommodityIndex: index})
+
+        // console.log("Entry number this is pressed: "+ index + this.state.commodity[index]);
+
+        this.setState({selectedStock: this.state.commodity[index], selectedCommodityIndex: index})
         // this.setState({isSelected: true})
-      //  this.setState({selectedStock: this.state.commodity[index]});
+        //  this.setState({selectedStock: this.state.commodity[index]});
         // -------->
         // this.setState({selectedCommodityIndex: index});
         // var temp = [];
@@ -208,10 +162,10 @@ class ChangeDisplayButton extends React.Component {
         //     temp[i] = false ;
         //   }
         // }
-        
-       // this.setState({selectedCommodityInfoArray: temp})
 
-     // Alert.alert("Entry number this is pressed:" + index + this.state.commodity[index]);
+        // this.setState({selectedCommodityInfoArray: temp})
+
+        // Alert.alert("Entry number this is pressed:" + index + this.state.commodity[index]);
     }
 
     onSwipeDown(gestureState) {
@@ -219,51 +173,51 @@ class ChangeDisplayButton extends React.Component {
         this.setState({selectedCommodityIndex: null, selectedStock: []})
     }
 
-    // _onRefresh = ()=>{
-    //     this.setState({refreshing: true});
-    //     this._onPressButton();
-    //   }
+    _onRefresh = ()=>{
+        //     this.setState({refreshing: true});
+        //     this._onPressButton();
+    }
 
     recurringLoading = ()=>{
-      console.log("I am recurringLoading ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-      if(this.state.appState==='active' && this.state.internetStatus){
-     //   console.log(" Yeah I am being called!!!!!!!!!!--------------------------------------------------")
-        console.log("Our appState is :"+ this.state.appState + "^^^^^" + "internetStatus is: " +this.state.internetStatus);
-        this.loadLiveFeed();
-      }
+        console.log("I am recurringLoading ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        if(this.state.appState==='active' && this.state.internetStatus){
+            console.log(" Yeah I am being called!!!!!!!!!!--------------------------------------------------")
+            console.log("Our appState is :"+ this.state.appState + "^^^^^" + "internetStatus is: " +this.state.internetStatus);
+            this.loadLiveFeed();
+        }
     }
 
     handleConnectivityChange = (connectionInfo)=>{
-   //   console.log('First change, type: ' + connectionInfo.type + ', effectiveType: ' + connectionInfo.effectiveType);
-      if(connectionInfo.type != "none"){
-       // console.log("------------------" + connectionInfo.type)
-        this.setState({internetStatus: true}, ()=>{
-          this.recurringLoading();
-        });
-        // this.recurringLoading();
-      }else {
-        this.setState({internetStatus: false});
-      }
+        //   console.log('First change, type: ' + connectionInfo.type + ', effectiveType: ' + connectionInfo.effectiveType);
+        if(connectionInfo.type != "none"){
+            // console.log("------------------" + connectionInfo.type)
+            this.setState({internetStatus: true}, ()=>{
+                this.recurringLoading();
+            });
+            // this.recurringLoading();
+        }else {
+            this.setState({internetStatus: false});
+        }
     }
 
     _handleAppStateChange = (nextAppState)=>{
-      //  console.log("_handleAppStateChange is called: "+nextAppState);
-      //  console.log("this.state.appState: "+this.state.appState)
-      //  var bool1 = this.state.appState==='background';
-      //  var bool2 = nextAppState === 'active'
-      //  console.log(bool1);
-      //  console.log("bdkjbsk" + bool2)
+        //  console.log("_handleAppStateChange is called: "+nextAppState);
+        //  console.log("this.state.appState: "+this.state.appState)
+        //  var bool1 = this.state.appState==='background';
+        //  var bool2 = nextAppState === 'active'
+        //  console.log(bool1);
+        //  console.log("bdkjbsk" + bool2)
 
-      // if (this.state.appState==='background' && nextAppState === 'active') {
-      //   console.log('App has come to the foreground!')
-      //   this.setState({appState: nextAppState}, ()=>{
-      //     // console.log(this.state.appState);
-      //     this.recurringLoading();
-      //   });
-      // }
-      this.setState({appState: nextAppState}, ()=>{
-        this.recurringLoading();
-      });      
+        // if (this.state.appState==='background' && nextAppState === 'active') {
+        //   console.log('App has come to the foreground!')
+        //   this.setState({appState: nextAppState}, ()=>{
+        //     // console.log(this.state.appState);
+        //     this.recurringLoading();
+        //   });
+        // }
+        this.setState({appState: nextAppState}, ()=>{
+            this.recurringLoading();
+        });
     }
 
     componentDidMount(){
@@ -282,185 +236,195 @@ class ChangeDisplayButton extends React.Component {
         }
       });
         // this.loadLiveFeed();
-      //  console.log("State of the app is: ------------------------->"+AppState.currentState);
-        // setInterval(this.recurringLoading, 60000)
+        //  console.log("State of the app is: ------------------------->"+AppState.currentState);
+        setInterval(this.recurringLoading, 5000)
 
-        this.recurringLoading();
+        // this.recurringLoading();
     }
 
     _onRefresh = () => {
-      this.setState({refreshing: true});
-      this.loadLiveFeed();
+        this.setState({refreshing: true});
+        this.loadLiveFeed();
+    }
+
+    displayChangeButtonPressed = () => {
+        this.setState({toggleDisplayChangeFlag: !this.state.toggleDisplayChangeFlag})
     }
 
     render() {
         const config = {
-          velocityThreshold: 0.3,
-          directionalOffsetThreshold: 80
+            velocityThreshold: 0.3,
+            directionalOffsetThreshold: 80
         };
         // console.log("===========================================> "+this.state.commodity);
         let bool = this.state.commodity.length;
         return (
-          <View style={styles.container}>
-        
-              {
-                
-                function(){
-                    
-                   if(bool){
-                 return ( 
-                     <View style={styles.stockBasket}>
-                     <ScrollView refreshControl={
-                                                  <RefreshControl
-                                                    refreshing={this.state.refreshing}
-                                                    onRefresh={this._onRefresh}
-                                                  />
-                                                }>
-                    {
-                   this.state.commodity.map(function(value,index){
-               //   console.log("--------------------------------------------------------------------------------------------------- : "+index + " "+value[0]);
-               if(value){
-                return (
-                  <CommodityEntry  value={value} isSelected={this.state.selectedCommodityIndex==index?true:false } handleEntryPress={this.handleEntryPress} index={index} key={index}/>
-                  )
-               }   
-               
-                  
-                    
-                }.bind(this))
-              
-              }
-               </ScrollView>
-            </View>
-                )
-               } else {
-                 if(this.state.internetStatus){
-                  return (
-                    <View style={ {flex: 1, backgroundColor: '#02091A', justifyContent: 'center', alignItems: 'center'} }>
-                      <Text style={{color: '#fff'}}>Loading... Please wait!</Text>
-                      <ActivityIndicator size="large" color="#00ff00" />
-                    </View>  
-                   ) 
-                 }else {
-                   return(
-                    <View style={ {flex: 1, backgroundColor: '#02091A', justifyContent: 'center', alignItems: 'center'} }>
-                     <Text style={{color: '#fff', fontSize: 18}}>No or Bad Internet!</Text>
-                     <Text style={{color: '#fff'}}>Please check your Connection and try again!</Text>
-                  </View> 
-                   )
-                  
-                 }
-                  
-               }
-              }.bind(this)()
-              
-              }
-             
-            {/* <View> */}
-            
-    
-              {
-    
-                    
-                function(){
-                  if(this.state.selectedStock.length){
-                    return (
-                      <GestureRecognizer
-                        // onSwipe={(direction, state) => this.onSwipe(direction, state)}
-                        onSwipeDown={(state) => this.onSwipeDown(state)}
-                        config={config}
-                        style={{
-                          flex: 2,
-                        }}
-                        >
-                       {/* <Text> {this.state.selectedStock[0]}</Text> */}
-                      <View style={styles.selectedStockInfo}>
-                        {/* <View style={styles.infoAreaSingleRow}><View style={styles.infoAreaSingleItem}><Text> {this.state.selectedStock[0]}</Text></View></View> */}
-                          <View style={{borderBottomWidth: 1, alignItems: 'center', borderTopWidth: 2, borderTopColor: 'rgb(183, 168, 168)', borderBottomColor: 'rgb(183, 168, 168)'}}>
-                            <Icon name="angle-down" backgroundColor= '#fff' size={30} color="#f9f4f4" />
-                            <Text style={{textAlign: 'center', color: '#fff', fontWeight: 'bold', fontSize: 18}}>{this.state.selectedStock[0]}</Text>
-                            <Text style={{textAlign: 'center', color: '#fff', fontWeight: 'bold'}}>{this.state.selectedStock[1]}</Text>
-                          </View>
-                          <View style={styles.infoAreaSingleRow} >
-                              <View style={styles.infoAreaSingleItem}>
-                                <Text style={{color: '#c8cbd1', paddingLeft: 6}}>OPEN</Text>
-                                <Text style={{marginRight: 15, color: '#fff', fontWeight: 'bold'}}>{this.state.selectedStock[2]}</Text>
-                              </View>
-    
-                              <View style={styles.infoAreaSingleItem}>
-                                <Text style={{color: '#c8cbd1'}}>SPOT PRICE</Text>
-                                <Text style={{color: '#fff', fontWeight: 'bold', marginRight: 6}}>{this.state.selectedStock[10]}</Text>
-                              </View>
-                              
-                          </View>
-    
-                          <View style={styles.infoAreaSingleRow} >
-                              <View style={styles.infoAreaSingleItem}>
-                                <Text style={{color: '#c8cbd1', paddingLeft: 6}}>HIGH</Text>
-                                <Text style={{marginRight: 15, color: '#fff', fontWeight: 'bold'}}>{this.state.selectedStock[3]}</Text>
-                              </View>
-    
-                              <View style={styles.infoAreaSingleItem}>
-                                <Text style={{color: '#c8cbd1'}}>SPOT DT.</Text>
-                                <Text adjustsFontSizeToFit={true} style={{fontSize: 10, width: 60, color: '#fff', fontWeight: 'bold', marginRight: 6 }}>{this.state.selectedStock[11]}</Text>
-                              </View>
-                              
-                          </View>
-    
-                          <View style={styles.infoAreaSingleRow} >
-                              <View style={styles.infoAreaSingleItem}>
-                                <Text style={{color: '#c8cbd1', paddingLeft: 6}}>LOW</Text>
-                                <Text style={{marginRight: 15, color: '#fff', fontWeight: 'bold'}}>{this.state.selectedStock[4]}</Text>
-                              </View>
-    
-                              <View style={styles.infoAreaSingleItem}>
-                                <Text style={{color: '#c8cbd1'}}>BEST BUY</Text>
-                                <Text style={{color: '#fff', fontWeight: 'bold', marginRight: 6}}>{this.state.selectedStock[12]}</Text>
-                              </View>
-                              
-                          </View>
-    
-                          <View style={styles.infoAreaSingleRow} >
-                              <View style={styles.infoAreaSingleItem}>
-                                <Text style={{color: '#c8cbd1', paddingLeft: 6}}>CLOSE</Text>
-                                <Text style={{marginRight: 15, color: '#fff', fontWeight: 'bold'}}>{this.state.selectedStock[5]}</Text>
-                              </View>
-    
-                              <View style={styles.infoAreaSingleItem}>
-                                <Text style={{color: '#c8cbd1'}}>BEST SELL</Text>
-                                <Text style={{color: '#fff', fontWeight: 'bold', marginRight: 6}}>{this.state.selectedStock[13]}</Text>
-                              </View>
-                              
-                          </View>
-                          <View style={styles.infoAreaSingleRow} >
-                              <View style={styles.infoAreaSingleItem}>
-                                <Text style={{color: '#c8cbd1', paddingLeft: 6}}>AV TP.</Text>
-                                <Text style={{marginRight: 15, color: '#fff', fontWeight: 'bold'}}>{this.state.selectedStock[9]}</Text>
-                              </View>
-    
-                              <View style={styles.infoAreaSingleItem}>
-                                <Text style={{color: '#c8cbd1'}}>OPEN INT.</Text>
-                                <Text style={{color: '#fff', fontWeight: 'bold', marginRight: 6}}>{this.state.selectedStock[14]}</Text>
-                              </View>
-                              
-                          </View>
-                     </View>
-                     </GestureRecognizer>  
-                ) 
-                }else {
-                  return <Text>----</Text>
+            <View style={styles.container}>
+
+                {
+
+                    function(){
+
+                        if(bool){
+                            return (
+                                <View style={styles.stockBasket}>
+                                    <ScrollView refreshControl={
+                                        <RefreshControl
+                                            refreshing={this.state.refreshing}
+                                            onRefresh={this._onRefresh}
+                                        />
+                                    }>
+                                        {
+                                            this.state.commodity.map(function(value,index){
+                                                //   console.log("--------------------------------------------------------------------------------------------------- : "+index + " "+value[0]);
+                                                if(value){
+                                                    return (
+                                                        <CommodityEntry displayChangeButtonPressed={this.displayChangeButtonPressed} toggleDisplayChangeFlag={this.state.toggleDisplayChangeFlag}  value={value} isSelected={this.state.selectedCommodityIndex==index?true:false } handleEntryPress={this.handleEntryPress} index={index} key={index}/>
+                                                    )
+                                                }
+
+
+
+                                            }.bind(this))
+
+                                        }
+                                    </ScrollView>
+                                </View>
+                            )
+                        } else {
+                            if(this.state.internetStatus){
+                                return (
+                                    <View style={ {flex: 1, backgroundColor: '#02091A', justifyContent: 'center', alignItems: 'center'} }>
+                                        <Text style={{color: '#fff'}}>Loading... Please wait!</Text>
+                                        <ActivityIndicator size="large" color="#00ff00" />
+                                    </View>
+                                )
+                            }else {
+                                return(
+                                    <View style={ {flex: 1, backgroundColor: '#02091A', justifyContent: 'center', alignItems: 'center'} }>
+                                        <Text style={{color: '#fff', fontSize: 18}}>No or Bad Internet!</Text>
+                                        <Text style={{color: '#fff'}}>Please check your Connection and try again!</Text>
+                                    </View>
+                                )
+
+                            }
+
+                        }
+                    }.bind(this)()
+
                 }
-                  
-              }.bind(this)()
-    
-    
-              }
-    
-               
+
+                {/* <View> */}
+
+
+                {
+
+
+                    function(){
+                        if(this.state.selectedStock.length){
+                            let priceArr = this.state.selectedStock[3] ? this.state.selectedStock[3].trim().split(" ").filter(elem => elem !== "") : [];
+                            let ltp = priceArr[1];
+                            let high = priceArr[2];
+                            let low = priceArr[0];
+                            let spotDateTimeArr = this.state.selectedStock[9] ? this.state.selectedStock[9].split(" | ") : [];
+                            let spotDate = spotDateTimeArr[0] + " " + spotDateTimeArr[1];
+                            return (
+                                <GestureRecognizer
+                                    // onSwipe={(direction, state) => this.onSwipe(direction, state)}
+                                    onSwipeDown={(state) => this.onSwipeDown(state)}
+                                    config={config}
+                                    style={{
+                                        flex: 2,
+                                    }}
+                                >
+                                    {/* <Text> {this.state.selectedStock[0]}</Text> */}
+                                    <View style={styles.selectedStockInfo}>
+                                        {/* <View style={styles.infoAreaSingleRow}><View style={styles.infoAreaSingleItem}><Text> {this.state.selectedStock[0]}</Text></View></View> */}
+                                        <View style={{borderBottomWidth: 1, alignItems: 'center', borderTopWidth: 2, borderTopColor: 'rgb(183, 168, 168)', borderBottomColor: 'rgb(183, 168, 168)'}}>
+                                            <Icon name="angle-down" backgroundColor= '#fff' size={30} color="#f9f4f4" />
+                                            <Text style={{textAlign: 'center', color: '#fff', fontWeight: 'bold', fontSize: 18}}>{this.state.selectedStock[0]}</Text>
+                                            <Text style={{textAlign: 'center', color: '#fff', fontWeight: 'bold'}}>{this.state.selectedStock[1]}</Text>
+                                        </View>
+                                        <View style={styles.infoAreaSingleRow} >
+                                            <View style={styles.infoAreaSingleItem}>
+                                                <Text style={{color: '#c8cbd1', paddingLeft: 6}}>OPEN</Text>
+                                                <Text style={{marginRight: 15, color: '#fff', fontWeight: 'bold'}}>{this.state.selectedStock[2]}</Text>
+                                            </View>
+
+                                            <View style={styles.infoAreaSingleItem}>
+                                                <Text style={{color: '#c8cbd1'}}>SPOT PRICE</Text>
+                                                <Text style={{color: '#fff', fontWeight: 'bold', marginRight: 6}}>{this.state.selectedStock[8]}</Text>
+                                            </View>
+
+                                        </View>
+
+                                        <View style={styles.infoAreaSingleRow} >
+                                            <View style={styles.infoAreaSingleItem}>
+                                                <Text style={{color: '#c8cbd1', paddingLeft: 6}}>HIGH</Text>
+                                                <Text style={{marginRight: 15, color: '#fff', fontWeight: 'bold'}}>{high}</Text>
+                                            </View>
+
+                                            <View style={styles.infoAreaSingleItem}>
+                                                <Text style={{color: '#c8cbd1'}}>SPOT DT.</Text>
+                                                <Text adjustsFontSizeToFit={true} style={{fontSize: 8, width: 60, color: '#fff', fontWeight: 'bold', marginRight: 6 }}>{spotDate}</Text>
+                                            </View>
+
+                                        </View>
+
+                                        <View style={styles.infoAreaSingleRow} >
+                                            <View style={styles.infoAreaSingleItem}>
+                                                <Text style={{color: '#c8cbd1', paddingLeft: 6}}>LOW</Text>
+                                                <Text style={{marginRight: 15, color: '#fff', fontWeight: 'bold'}}>{low}</Text>
+                                            </View>
+
+                                            <View style={styles.infoAreaSingleItem}>
+                                                <Text style={{color: '#c8cbd1'}}>BEST BUY</Text>
+                                                <Text style={{color: '#fff', fontWeight: 'bold', marginRight: 6}}>{this.state.selectedStock[10]}</Text>
+                                            </View>
+
+                                        </View>
+
+                                        <View style={styles.infoAreaSingleRow} >
+                                            <View style={styles.infoAreaSingleItem}>
+                                                <Text style={{color: '#c8cbd1', paddingLeft: 6}}>CLOSE</Text>
+                                                <Text style={{marginRight: 15, color: '#fff', fontWeight: 'bold'}}>{this.state.selectedStock[4]}</Text>
+                                            </View>
+
+                                            <View style={styles.infoAreaSingleItem}>
+                                                <Text style={{color: '#c8cbd1'}}>BEST SELL</Text>
+                                                <Text style={{color: '#fff', fontWeight: 'bold', marginRight: 6}}>{this.state.selectedStock[11]}</Text>
+                                            </View>
+
+                                        </View>
+                                        <View style={styles.infoAreaSingleRow} >
+                                            <View style={styles.infoAreaSingleItem}>
+                                                <Text style={{color: '#c8cbd1', paddingLeft: 6}}>AV TP.</Text>
+                                                <Text style={{marginRight: 15, color: '#fff', fontWeight: 'bold'}}>{this.state.selectedStock[7]}</Text>
+                                            </View>
+
+                                            <View style={styles.infoAreaSingleItem}>
+                                                <Text style={{color: '#c8cbd1'}}>OPEN INT.</Text>
+                                                <Text style={{color: '#fff', fontWeight: 'bold', marginRight: 6}}>{this.state.selectedStock[12]}</Text>
+                                            </View>
+
+                                        </View>
+                                    </View>
+                                </GestureRecognizer>
+                            )
+                        }else {
+                            return <Text>----</Text>
+                        }
+
+                    }.bind(this)()
+
+
+                }
+
+
             </View>
-          //  </View>
+            //  </View>
         );
-      }
+    }
 }
 
 const styles = StyleSheet.create({
@@ -505,7 +469,7 @@ const styles = StyleSheet.create({
     stockEntryRightPart: {
       flexDirection: 'row',
       alignItems: 'center',
-      
+
     },
     button: {
       width: 70,

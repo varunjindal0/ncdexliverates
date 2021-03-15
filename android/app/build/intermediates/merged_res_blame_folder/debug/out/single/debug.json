@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "/Users/varun/Desktop/19/ncdexliverates/android/app/build/intermediates/res/merged/debug/mipmap-mdpi_icon.png.flat",
+        "source": "/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/res/mipmap-mdpi/icon.png"
+    },
+    {
+        "merged": "/Users/varun/Desktop/19/ncdexliverates/android/app/build/intermediates/res/merged/debug/mipmap-hdpi_icon.png.flat",
+        "source": "/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/res/mipmap-hdpi/icon.png"
+    },
+    {
+        "merged": "/Users/varun/Desktop/19/ncdexliverates/android/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/varun/Desktop/19/ncdexliverates/android/app/build/intermediates/res/merged/debug/drawable_background_splash.xml.flat",
+        "source": "/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/res/drawable/background_splash.xml"
+    },
+    {
+        "merged": "/Users/varun/Desktop/19/ncdexliverates/android/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_icon.png.flat",
+        "source": "/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/res/mipmap-xxhdpi/icon.png"
+    },
+    {
+        "merged": "/Users/varun/Desktop/19/ncdexliverates/android/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/varun/Desktop/19/ncdexliverates/android/app/build/intermediates/res/merged/debug/layout_launch_screen.xml.flat",
+        "source": "/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/res/layout/launch_screen.xml"
+    },
+    {
+        "merged": "/Users/varun/Desktop/19/ncdexliverates/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi_icon.png.flat",
+        "source": "/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/res/mipmap-xhdpi/icon.png"
+    },
+    {
+        "merged": "/Users/varun/Desktop/19/ncdexliverates/android/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/varun/Desktop/19/ncdexliverates/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    }
+]

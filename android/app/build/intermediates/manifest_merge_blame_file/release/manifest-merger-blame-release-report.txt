@@ -1,0 +1,86 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.ncdexliverates"
+4    android:versionCode="2357239"
+5    android:versionName="2.1" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+8-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:6:5-67
+11-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:6:22-64
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:7:5-79
+12-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:7:22-76
+13    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+13-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:8:5-77
+13-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:8:22-75
+14+   
+15+   
+16    <application
+16-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:14:5-49:19
+17        android:name="com.ncdexliverates.MainApplication"
+17-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:15:7-38
+18        android:allowBackup="false"
+18-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:18:7-34
+19        android:icon="@mipmap/ic_launcher"
+19-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:17:7-41
+20        android:label="@string/app_name"
+20-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:16:7-39
+21        android:supportsRtl="true"
+21-->[:react-native-splash-screen] /Users/varun/Desktop/19/ncdexliverates/node_modules/react-native-splash-screen/android/build/intermediates/library_manifest/release/AndroidManifest.xml:14:9-35
+22        android:theme="@style/AppTheme"
+22-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:21:7-38
+23        android:usesCleartextTraffic="true" >
+23-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:20:7-42
+24        <activity
+24-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:23:9-34:20
+25            android:name="com.ncdexliverates.SplashActivity"
+25-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:24:13-43
+26            android:label="@string/app_name"
+26-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:26:13-45
+27            android:screenOrientation="portrait"
+27-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:28:13-49
+28            android:theme="@style/splashTheme" >
+28-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:25:13-47
+29            <intent-filter>
+29-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:30:13-33:29
+30                <action android:name="android.intent.action.MAIN" />
+30-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:31:17-69
+30-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:31:25-66
+31
+32                <category android:name="android.intent.category.LAUNCHER" />
+32-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:32:17-77
+32-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:32:27-74
+33            </intent-filter>
+34        </activity>
+35        <activity
+35-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:36:7-47:18
+36            android:name="com.ncdexliverates.MainActivity"
+36-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:37:9-37
+37            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+37-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:39:9-79
+38            android:exported="true"
+38-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:42:11-34
+39            android:label="@string/app_name"
+39-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:38:9-41
+40            android:screenOrientation="portrait"
+40-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:40:9-45
+41            android:windowSoftInputMode="adjustResize" >
+41-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:41:9-51
+42
+43            <!-- <intent-filter> -->
+44            <!-- <action android:name="android.intent.action.MAIN" /> -->
+45            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+46            <!-- </intent-filter> -->
+47        </activity>
+48        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+48-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:48:7-84
+48-->/Users/varun/Desktop/19/ncdexliverates/android/app/src/main/AndroidManifest.xml:48:17-81
+49    </application>
+50
+51</manifest>

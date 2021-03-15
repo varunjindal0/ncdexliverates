@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/ncdexliverates.iml" filepath="$PROJECT_DIR$/ncdexliverates.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-splash-screen/android/react-native-splash-screen.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-splash-screen/android/react-native-splash-screen.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../node_modules/react-native-vector-icons/android/react-native-vector-icons.iml" filepath="$PROJECT_DIR$/../node_modules/react-native-vector-icons/android/react-native-vector-icons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ncdexliverates.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ncdexliverates.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/407096244/ncdexliverates.react-native-splash-screen.iml" filepath="$PROJECT_DIR$/.idea/modules/407096244/ncdexliverates.react-native-splash-screen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/42119534/ncdexliverates.react-native-vector-icons.iml" filepath="$PROJECT_DIR$/.idea/modules/42119534/ncdexliverates.react-native-vector-icons.iml" />
     </modules>
   </component>
 </project>

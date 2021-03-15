@@ -100,9 +100,9 @@ android {
     defaultConfig {
         applicationId "com.ncdexliverates"
         minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 29
+        versionCode 3
+        versionName "2.1"
     }
     signingConfigs {
         release {
