@@ -21,7 +21,7 @@
     "babel-core": "^6.26.3",
     "https": "^1.0.0",
     "react": "16.3.1",
-    "react-native": "^0.55.4",
+    "react-native": "^0.70.2",
     "react-native-cheerio": "^1.0.0-rc.4",
     "react-native-splash-screen": "^3.0.6",
     "react-native-swipe-gestures": "^1.0.2",
